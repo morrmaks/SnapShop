@@ -1,0 +1,27 @@
+@use "../scss/variables" as *;
+@use "../scss/mixins";
+
+.gallery {
+  @include mixins.grid($templateGallery, 24px, row);
+  @include mixins.container(80px, 160px);
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+    gap: $minPadding;
+  }
+
+  @media (max-width: 560px) {
+    padding: 40px $minPadding 80px;
+  }
+
+  &__item {
+    @include mixins.selectable($primaryLight);
+    padding: $defaultPadding;
+    border-radius: $defaultBorderRadius;
+
+    @media (max-width: 560px) {
+      border-radius: 30px;
+      padding: $minPadding;
+    }
+  }
+}

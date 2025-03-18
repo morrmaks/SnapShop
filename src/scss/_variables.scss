@@ -1,0 +1,40 @@
+$background: #370F21;
+$primary: #14060C;
+$primaryLight: #4F1E33;
+$hover: #C75F8C;
+$secondary: #FFFFFF;
+$error: #F18B7E;
+
+//$background: #0F2137;
+//$primary: #060C14;
+//$primaryLight: #1E334F;
+//$hover: #5F8CC7;
+
+$font: "YS Text", Roboto, Helvetica, Arial, sans-serif;
+
+$smallFontSize: 12px, 16px, 20px;
+$mainFontSize: 16px, 20px, 30px;
+$titleFontSize: 30px, 40px, 50px;
+
+$minPageWidth: 320px;
+$maxPageWidth: 1320px;
+
+$category1: #83FA9D;
+$category2: #FAD883;
+$category3: #B783FA;
+$category4: #83DDFA;
+$category5: #FAA083;
+
+$minPadding: 16px;
+$midPadding: 24px;
+$defaultPadding: 48px;
+
+$minBorderRadius: 12px;
+$defaultBorderRadius: 60px;
+
+$defaultBorder: 2px $primaryLight solid;
+$checkedBorder: 2px #FFFFFF solid;
+$hoverBorder: 2px solid rgba(#FFFFFF, 0.4);
+$overlayBackground: rgba(0, 0, 0, 0.8);
+
+$templateGallery: repeat(auto-fit, minmax(400px, 1fr));

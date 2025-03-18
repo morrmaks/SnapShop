@@ -1,0 +1,56 @@
+@use "../variables" as *;
+
+@mixin button($color, $background: $secondary, $backgroundHover: $primaryLight) {
+  padding: 20px 50px;
+  color: $color;
+  background-color: $background;
+  border-radius: 20px;
+  font-size: nth($mainFontSize, 3);
+  font-weight: 400;
+  cursor: pointer;
+  transition: background-color .2s ease;
+
+  &:hover {
+    background-color: $backgroundHover;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: .25;
+  }
+}
+
+@mixin link($color: $secondary, $hover: $secondary, $opacity: 1) {
+  color: $color;
+  background-color: transparent;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  transition: .2s ease;
+
+  &:hover {
+    color: $hover;
+    opacity: $opacity;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: .25;
+  }
+}
+
+@mixin selectable($hover: transparent, $opacity: 1) {
+  cursor: pointer;
+  position: relative;
+  transition: .2s ease;
+
+  &:hover {
+    background-color: $hover;
+    opacity: $opacity;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: .25;
+  }
+}

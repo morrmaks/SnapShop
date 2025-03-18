@@ -1,0 +1,107 @@
+@use "../scss/variables" as *;
+@use "../scss/mixins";
+
+.modal {
+  @include mixins.flex;
+  @include mixins.sublayer(absolute);
+  height: max-content;
+  min-height: 100vh;
+  min-width: $minPageWidth;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 5vh $defaultPadding;
+  z-index: 10;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease, visibility 0.2s;
+
+  @media (max-width: 560px) {
+    padding: 5vh $minPadding;
+  }
+
+  &::before {
+    @include mixins.sublayer;
+    content: "";
+    background-color: $overlayBackground;
+  }
+
+  &_active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &__container {
+    @include mixins.flex(row);
+    @include mixins.container;
+    min-width: $maxPageWidth;
+    height: max-content;
+    background-color: $background;
+    position: relative;
+    border-radius: $defaultBorderRadius;
+
+    @media (max-width: 1416px) {
+      min-width: 100%;
+    }
+
+    @media (max-width: 910px) {
+      padding: $midPadding;
+    }
+
+    @media (max-width: 560px) {
+      border-radius: 30px;
+    }
+  }
+
+  &__close {
+    @include mixins.background("../images/x-circle-button.png", cover, center);
+    @include mixins.link($secondary, $primaryLight, .5);
+    width: 62px;
+    height: 62px;
+    position: absolute;
+    top: $defaultPadding;
+    right: $defaultPadding;
+
+    @media (max-width: 910px) {
+      width: 40px;
+      height: 40px;
+      top: $midPadding;
+      right: $midPadding;
+    }
+    @media (max-width: 560px) {
+      width: 30px;
+      height: 30px;
+      top: $minPadding;
+      right: $minPadding;
+    }
+  }
+
+  &__content {
+    flex-grow: 1;
+  }
+
+  &__title {
+    font-size: nth($mainFontSize, 3);
+    margin: 0;
+
+    @media (max-width: 910px) {
+      font-size: nth($mainFontSize, 2);
+    }
+
+    @media (max-width: 560px) {
+      font-size: nth($mainFontSize, 1);
+    }
+  }
+
+  &__actions {
+    @include mixins.flex(row);
+    align-items: center;
+    gap: $defaultPadding;
+    margin-top: 60px;
+
+    @media (max-width: 910px) {
+      gap: calc($defaultPadding / 2);
+      margin-top: 40px;
+    }
+  }
+}
