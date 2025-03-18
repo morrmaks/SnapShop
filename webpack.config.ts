@@ -12,7 +12,7 @@ export default (env: {mode: string}) => { //передает переменну�
   const isProd = env.mode === 'production';
 
   return {
-    entry: './src/index.js', //откуда строить зависимости
+    entry: './src/index.ts', //откуда строить зависимости
     output: {
       path: path.resolve(__dirname, 'dist'), //путь к папке, где собирать финальный бандл
       filename: '[name].[contenthash].js', //имя файла финального бандла
@@ -23,7 +23,7 @@ export default (env: {mode: string}) => { //передает переменну�
     module: {
       rules: buildLoaders(isDev),
     },
-    ignoreWarnings: [/Global built-in functions are deprecated/],
+    ignoreWarnings: [/Global built-in functions are deprecated/], //игнорировать предупреждения содержащие данную фразу
     plugins: buildPlugins(isProd),
     resolve: buildResolvers(),
     optimization: {
