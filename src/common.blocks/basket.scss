@@ -38,7 +38,7 @@
       gap: 10px;
     }
 
-    &_info {
+    &-info {
       @include mixins.flex(row);
       min-width: 100%;
       justify-content: space-between;

@@ -13,7 +13,7 @@
 </head>
 
 <body class="page">
-  <div class="page__wrapper page__wrapper_locked">
+  <div class="page__wrapper">
     <header class="header">
       <div class="header__container">
         <a href="" class="header__logo">
@@ -123,6 +123,7 @@
   </div>
 
   <div class="modal" id="modal-container">
+    <div class="modal__overlay"></div>
     <section class="modal__container">
       <button class="modal__close" aria-label="закрыть"></button>
       <div class="modal__content"></div>
@@ -130,6 +131,7 @@
   </div>
 
   <div class="modal">
+    <div class="modal__overlay"></div>
     <section class="modal__container">
       <button class="modal__close" aria-label="закрыть"></button>
       <div class="modal__content">
@@ -144,7 +146,7 @@
             <h2 class="card__title">Стол для посидеть повтыкать</h2>
             <p class="card__text">обостряет ощущение сдвг</p>
             <div class="card__actions">
-              <button class="button button_type_order">В корзину</button>
+              <button class="button button_type_order card__button">В корзину</button>
               <span class="card__price">2000 тугриков</span>
             </div>
           </div>
@@ -154,6 +156,7 @@
   </div>
 
   <div class="modal">
+    <div class="modal__overlay"></div>
     <section class="modal__container">
       <button class="modal__close" aria-label="закрыть"></button>
       <div class="modal__content">
@@ -162,7 +165,7 @@
           <ul class="basket__list">
             <li class="basket__item">
               <span class="basket__item-index">1</span>
-              <div class="basket__item_info">
+              <div class="basket__item-info">
                 <span class="basket__item-title">Пиксельное облако</span>
                 <span class="basket__item-price">400 тугриков</span>
               </div>
@@ -170,7 +173,7 @@
             </li>
             <li class="basket__item">
               <span class="basket__item-index">2</span>
-              <div class="basket__item_info">
+              <div class="basket__item-info">
                 <span class="basket__item-title">Всесторонний стол</span>
                 <span class="basket__item-price">1700 тугриков</span>
               </div>
@@ -178,7 +181,7 @@
             </li>
             <li class="basket__item">
               <span class="basket__item-index">3</span>
-              <div class="basket__item_info">
+              <div class="basket__item-info">
                 <span class="basket__item-title">Всесторонний стол</span>
                 <span class="basket__item-price">1700 тугриков</span>
               </div>
@@ -186,7 +189,7 @@
             </li>
             <li class="basket__item">
               <span class="basket__item-index">4</span>
-              <div class="basket__item_info">
+              <div class="basket__item-info">
                 <span class="basket__item-title">Всесторонний стол</span>
                 <span class="basket__item-price">1700 тугриков</span>
               </div>
@@ -194,7 +197,7 @@
             </li>
           </ul>
           <div class="modal__actions">
-            <button class="button button_type_order">Оформить</button>
+            <button class="button button_type_order basket__button">Оформить</button>
             <span class="basket__price">0 тугриков</span>
           </div>
         </section>
@@ -203,6 +206,7 @@
   </div>
 
   <div class="modal">
+    <div class="modal__overlay"></div>
     <section class="modal__container">
       <button class="modal__close" aria-label="закрыть"></button>
       <div class="modal__content">
@@ -249,6 +253,7 @@
   </div>
 
   <div class="modal">
+    <div class="modal__overlay"></div>
     <section class="modal__container">
       <button class="modal__close" aria-label="закрыть"></button>
       <div class="modal__content">
@@ -285,6 +290,7 @@
   </div>
 
   <div class="modal">
+    <div class="modal__overlay"></div>
     <section class="modal__container">
       <button class="modal__close" aria-label="закрыть"></button>
       <div class="modal__content">
@@ -297,7 +303,7 @@
     </section>
   </div>
 
-  <template id="card-catalog">
+  <template id="card-item">
     <button class="card gallery__item">
       <span class="card__category">Хвойное</span>
       <h2 class="card__title">Ель</h2>
@@ -310,7 +316,7 @@
     </button>
   </template>
 
-  <template class="card-preview">
+  <template id="card-preview">
     <section class="card">
       <img
         src=""
@@ -343,7 +349,7 @@
       <h2 class="modal__title">Корзина</h2>
       <ul class="basket__list"></ul>
       <div class="modal__actions">
-        <button class="button button_type_order">Оформить</button>
+        <button class="button button_type_order basket__button">Оформить</button>
         <span class="basket__price">0 тугриков</span>
       </div>
     </section>
@@ -354,7 +360,7 @@
           <fieldset class="order">
             <legend class="order__legend">Способ оплаты</legend>
             <div class="order__buttons">
-              <label class="button button_payment-method">
+              <label class="button">
                 <input
                   type="radio"
                   name="payment"
@@ -363,7 +369,7 @@
                 >
                 Онлайн
               </label>
-              <label class="button button_payment-method">
+              <label class="button">
                 <input
                   type="radio"
                   name="payment"

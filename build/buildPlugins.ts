@@ -3,6 +3,7 @@ import url from "url";
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 export default function buildPlugins(isProd: boolean) {
@@ -15,6 +16,7 @@ export default function buildPlugins(isProd: boolean) {
         filename: 'css/[name].[contenthash:8].css', //в отдельную папку
         chunkFilename: 'css/[name].[contenthash:8].css',
       }),
+      new CleanWebpackPlugin(),
       new Dotenv(),
     ].filter(Boolean)
 };

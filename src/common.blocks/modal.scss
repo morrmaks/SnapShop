@@ -20,15 +20,15 @@
     padding: 5vh $minPadding;
   }
 
-  &::before {
-    @include mixins.sublayer;
-    content: "";
-    background-color: $overlayBackground;
-  }
-
   &_active {
     visibility: visible;
     opacity: 1;
+  }
+
+  &__overlay {
+    @include mixins.sublayer;
+    content: "";
+    background-color: $overlayBackground;
   }
 
   &__container {
