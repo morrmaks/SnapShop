@@ -75,6 +75,6 @@ export class Card extends Component<ICard> {
   }
 
   set price(value: number | null) {
-    this.setText(this._price, value ? `${value} тугриков` : 'Нет цены');
+    this.setText(this._price, value ? `${value} тугриков` : 'Цены нет, нет цены');
   }
 }
