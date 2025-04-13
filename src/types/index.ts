@@ -1,10 +1,17 @@
+export interface IApiModel {
+  getListProductCard: () => Promise<ICard[]>,
+  getListProductBasket: () => Promise<IBasketItem[]>,
+  addProductBasket:  (product: IBasketItem) => Promise<IBasketItem[]>,
+  deleteProductBasket: (product: IBasketItem) => Promise<IBasketItem[]>
+}
+
 export interface IBasket {
   total: number | null;
   items: HTMLElement[];
 }
 
 export interface IBasketItem {
-  index: number;
+  id: string;
   title: string;
   price: number;
 }
@@ -12,6 +19,7 @@ export interface IBasketItem {
 export type CategoryType = 'Neon Comfort' | 'Gravity Shelves' | 'Holo Shine' | 'Pixel Lounge' | 'Cyber Desks';
 
 export interface ICard {
+  id: string;
   category: CategoryType;
   image: string;
   title: string;

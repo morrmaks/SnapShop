@@ -28,34 +28,42 @@ export class Card extends Component<ICard> {
     }
   }
 
-  set category(value: CategoryType) {
+  switchButtonText(val: boolean) {
+    if (val) {
+      this.setText(this._button, 'Добавляется...');
+    } else {
+      this.setText(this._button, 'В корзину');
+    }
+  }
+
+  set productId(val: string) {
+    this.container.dataset.id = val;
+  }
+
+  set category(val: CategoryType) {
     if (this._category) {
-      this.setText(this._category, value);
-      this._category.classList.add(categorySelectors[value]);
+      this.setText(this._category, val);
+      this._category.classList.add(categorySelectors[val]);
     }
   }
 
-  set image(value: string) {
+  set image(val: string) {
     if (this._image) {
-      this.setImage(this._image, value, this.title);
+      this.setImage(this._image, val, this.title);
     }
   }
 
-  set title(value: string) {
-    this.setText(this._title, value);
+  set title(val: string) {
+    this.setText(this._title, val);
   }
 
-  get title() {
-    return this._title.textContent || '';
-  }
-
-  set text(value: string) {
+  set text(val: string) {
     if (this._text) {
-      this.setText(this._text, value);
+      this.setText(this._text, val);
     }
   }
 
-  set price(value: number | null) {
-    this.setText(this._price, value ? `${value} тугриков` : 'Цены нет, нет цены');
+  set price(val: number | null) {
+    this.setText(this._price, val ? `${val} тугриков` : 'Цены нет, нет цены');
   }
 }

@@ -1,45 +1,53 @@
 import { Api } from '../base/Api';
-
-interface IApiModel {
-  getListProductCard: <T>() => Promise<T[]>
-  addProductBasket: <T>(product: T[]) => Promise<T[]>
-  getListProductBasket: <T>() => Promise<T[]>
-}
+import { IApiModel, IBasketItem, ICard } from '../../types';
 
 export class ApiModel extends Api implements IApiModel {
   constructor(supabaseUrl: string, supabaseKey: string) {
     super(supabaseUrl, supabaseKey);
   }
 
-  async initialCatalogAndBasket<T>():Promise<[T[], T[]]> {
+  async initialCatalogAndBasket():Promise<[ICard[], IBasketItem[]]> {
     return await Promise.all([
-      this.getListProductCard<T>(),
-      this.getListProductBasket<T>()
+      this.getListProductCard(),
+      this.getListProductBasket()
     ]);
   }
 
-  async getListProductCard<T>(): Promise<T[]> {
+  async getListProductCard(): Promise<ICard[]> {
     const res = await this.supabase
       .from('products')
       .select('*')
-      .order('created_at', {ascending: false});
-    return this._processResponse<T[]>(res);
+      .order('created_at', {ascending: true});
+    return this._processResponse<ICard[]>(res);
   }
 
-  async getListProductBasket<T>(): Promise<T[]> {
+  async getListProductBasket(): Promise<IBasketItem[]> {
     const res = await this.supabase
       .from('basket')
       .select('*')
-      .order('created_at', {ascending: false});
-    return this._processResponse<T[]>(res);
+      .order('created_at', {ascending: true});
+    return this._processResponse<IBasketItem[]>(res);
   }
 
-  async addProductBasket<T>(product: T[]): Promise<T[]> {
+  async addProductBasket(product: IBasketItem): Promise<IBasketItem[]> {
+    const insertObject = {
+      ...product,
+      product_id: product.id
+    }
+    delete insertObject.id;
+
     const res = await this.supabase
       .from('basket')
-      .insert(product)
+      .insert([insertObject])
       .select();
-    return this._processResponse<T[]>(res);
+    return this._processResponse<IBasketItem[]>(res);
   }
 
+  async deleteProductBasket(product: IBasketItem): Promise<IBasketItem[]> {
+    const res = await this.supabase
+      .from('basket')
+      .delete()
+      .eq('id', product.id);
+    return this._processResponse<IBasketItem[]>(res);
+  }
 }

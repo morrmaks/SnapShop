@@ -303,6 +303,12 @@
     </section>
   </div>
 
+  <div class="modal modal__loader" id="modal-loader">
+    <div class="modal__loader_spinner">
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+  </div>
+
   <template id="card-item">
     <button class="card gallery__item">
       <span class="card__category">Хвойное</span>
@@ -317,19 +323,19 @@
   </template>
 
   <template id="card-preview">
-    <section class="card">
+    <section class="card card_full">
       <img
         src=""
         alt=""
         class="card__image"
       >
       <div class="card__column">
-        <span class="card__category">Хвойное</span>
-        <h2 class="card__title">Ель с Кибертрона</h2>
-        <p class="card__text">Если планируете еще полгода вычищать ковер от иголок</p>
+        <span class="card__category"></span>
+        <h2 class="card__title"></h2>
+        <p class="card__text"></p>
         <div class="card__actions">
           <button class="button button_type_order card__button">В корзину</button>
-          <span class="card__price">600 тугриков</span>
+          <span class="card__price"></span>
         </div>
       </div>
     </section>
@@ -338,8 +344,10 @@
   <template id="basket-item">
     <li class="basket__item">
       <span class="basket__item-index"></span>
-      <span class="basket__item-title"></span>
-      <span class="basket__item-price"></span>
+      <div class="basket__item-info">
+        <span class="basket__item-title"></span>
+        <span class="basket__item-price"></span>
+      </div>
       <button class="basket__item-delete" aria-label="удалить"></button>
     </li>
   </template>
@@ -356,45 +364,44 @@
   </template>
 
   <template id="order">
-        <form class="form" name="order">
-          <fieldset class="order">
-            <legend class="order__legend">Способ оплаты</legend>
-            <div class="order__buttons">
-              <label class="button">
-                <input
-                  type="radio"
-                  name="payment"
-                  value="online"
-                  class="order__input"
-                >
-                Онлайн
-              </label>
-              <label class="button">
-                <input
-                  type="radio"
-                  name="payment"
-                  value="cash"
-                  class="order__input"
-                >
-                При получении
-              </label>
-            </div>
-            <label class="order__field">
-              <span class="form__label">Адрес доставки</span>
-              <input
-                type="text"
-                class="form__input"
-                placeholder="Введите адрес"
-                name="address"
-                required
-              >
-            </label>
-          </fieldset>
-          <div class="modal__actions">
-            <button class="button button_type_order" type="submit">Далее</button>
-            <span class="form__errors"></span>
-          </div>
-        </form>
+    <form class="form" name="order">
+      <fieldset class="order">
+        <legend class="order__legend">Способ оплаты</legend>
+        <div class="order__buttons">
+          <label class="order__label">
+            <input
+              type="radio"
+              name="payment"
+              value="online"
+              class="order__input"
+            >
+            <span class="button order__button">Онлайн</span>
+          </label>
+          <label class="order__label">
+            <input
+              type="radio"
+              name="payment"
+              value="cash"
+              class="order__input"
+            >
+            <span class="button order__button">При получении</span>
+          </label>
+        </div>
+        <label class="order__field">
+          <span class="form__label">Адрес доставки</span>
+          <input
+            type="text"
+            class="form__input"
+            placeholder="Введите адрес"
+            name="address"
+            required>
+        </label>
+      </fieldset>
+      <div class="modal__actions">
+        <button class="button button_type_order" type="submit">Далее</button>
+        <span class="form__errors"></span>
+      </div>
+    </form>
   </template>
 
   <template id="contacts">
