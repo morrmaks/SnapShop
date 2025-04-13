@@ -1,13 +1,7 @@
-import { Form } from './Form';
 import { IEvents } from '../../types/base/EventBroker';
+import { IFormOrder, PaymentMethods } from '../../types';
+import { Form } from './Form';
 import { ensureElement } from '../../utils/utils';
-
-type PaymentMethods = 'online' | 'cash';
-
-interface IFormOrder {
-  payment: PaymentMethods;
-  address: string;
-}
 
 export class FormOrder extends Form<IFormOrder>{
   protected _paymentOnline: HTMLInputElement;

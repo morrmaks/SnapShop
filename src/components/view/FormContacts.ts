@@ -1,11 +1,7 @@
-import { Form } from './Form';
 import { IEvents } from '../../types/base/EventBroker';
+import { IFormContacts } from '../../types';
+import { Form } from './Form';
 import { ensureElement } from '../../utils/utils';
-
-interface IFormContacts {
-  email: string;
-  phone: string;
-}
 
 export class FormContacts extends Form<IFormContacts>{
   protected _email: HTMLInputElement;

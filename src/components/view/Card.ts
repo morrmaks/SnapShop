@@ -1,26 +1,7 @@
+import { CategoryType, ICard, ICardActions } from '../../types';
 import { Component } from '../base/Component';
 import { ensureElement } from '../../utils/utils';
-
-type CategoryType = 'Neon Comfort' | 'Gravity Shelves' | 'Holo Shine' | 'Pixel Lounge' | 'Cyber Desks';
-enum categorySelectors {
-  'Neon Comfort' = 'card__category_comfort',
-  'Gravity Shelves' = 'card__category_shelves',
-  'Holo Shine' = 'card__category_shine',
-  'Pixel Lounge' = 'card__category_lounge',
-  'Cyber Desks' = 'card__category_desks'
-}
-
-interface ICard {
-  category: CategoryType;
-  image: string;
-  title: string;
-  text: string;
-  price: number | null;
-}
-
-interface ICardActions {
-  onClick: (event: MouseEvent) => void;
-}
+import { categorySelectors } from '../../utils/constants';
 
 export class Card extends Component<ICard> {
   protected _category: HTMLElement;

@@ -1,11 +1,7 @@
+import { IBasketItem } from '../../types';
 import { Component } from '../base/Component';
 import { ensureElement } from '../../utils/utils';
 
-interface IBasketItem {
-  index: number;
-  title: string;
-  price: number;
-}
 
 export class BasketItem extends Component<IBasketItem> {
   protected _index: HTMLElement;

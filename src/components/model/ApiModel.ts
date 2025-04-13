@@ -11,9 +11,24 @@ export class ApiModel extends Api implements IApiModel {
     super(supabaseUrl, supabaseKey);
   }
 
+  async initialCatalogAndBasket<T>():Promise<[T[], T[]]> {
+    return await Promise.all([
+      this.getListProductCard<T>(),
+      this.getListProductBasket<T>()
+    ]);
+  }
+
   async getListProductCard<T>(): Promise<T[]> {
     const res = await this.supabase
       .from('products')
+      .select('*')
+      .order('created_at', {ascending: false});
+    return this._processResponse<T[]>(res);
+  }
+
+  async getListProductBasket<T>(): Promise<T[]> {
+    const res = await this.supabase
+      .from('basket')
       .select('*')
       .order('created_at', {ascending: false});
     return this._processResponse<T[]>(res);
@@ -27,11 +42,4 @@ export class ApiModel extends Api implements IApiModel {
     return this._processResponse<T[]>(res);
   }
 
-  async getListProductBasket<T>(): Promise<T[]> {
-    const res = await this.supabase
-      .from('basket')
-      .select('*')
-      .order('created_at', {ascending: false});
-    return this._processResponse<T[]>(res);
-  }
 }

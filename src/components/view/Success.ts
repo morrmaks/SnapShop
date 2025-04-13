@@ -1,10 +1,7 @@
 import { IEvents } from '../../types/base/EventBroker';
+import { ISuccess } from '../../types';
 import { ensureElement } from '../../utils/utils';
 import { Component } from '../base/Component';
-
-interface ISuccess {
-  total: number;
-}
 
 export class Success extends Component<ISuccess>{
   protected _description: HTMLElement;

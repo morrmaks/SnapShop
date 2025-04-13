@@ -1,11 +1,7 @@
+import { IEvents } from '../../types/base/EventBroker';
+import { IForm } from '../../types';
 import { Component } from '../base/Component';
 import { ensureElement } from '../../utils/utils';
-import { IEvents } from '../../types/base/EventBroker';
-
-interface IForm {
-  valid: boolean;
-  // errors: Partial<>
-}
 
 export class Form<T> extends Component<IForm> {
   protected _submitButton: HTMLButtonElement;
