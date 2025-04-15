@@ -14,8 +14,6 @@ export class FormOrder extends Form<IFormOrder>{
     this._paymentOnline = ensureElement<HTMLInputElement>('.order__input[value=online]', container);
     this._paymentCash = ensureElement<HTMLInputElement>('.order__input[value=cash]', container);
     this._address = ensureElement<HTMLInputElement>('.form__input[name=address]', container);
-
-    // this._paymentOnline.addEventListener('');
   }
 
   set address(value: string) {

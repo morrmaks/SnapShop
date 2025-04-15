@@ -69,5 +69,6 @@
   &__errors {
     color: $error;
     font-size: nth($mainFontSize, 2);
+    white-space: pre-line;
   }
 }

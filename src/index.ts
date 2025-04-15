@@ -5,6 +5,7 @@ import { cloneTemplate, ensureElement } from './utils/utils';
 import { ApiModel } from './components/model/ApiModel';
 import { CatalogModel } from './components/model/CatalogModel';
 import { BasketModel } from './components/model/BasketModel';
+import { OrderModel } from './components/model/OrderModel';
 import { Page } from './components/view/Page';
 import { Card } from './components/view/Card';
 import { Modal } from './components/view/Modal';
@@ -13,7 +14,7 @@ import { BasketItem } from './components/view/BasketItem';
 import { FormOrder } from './components/view/FormOrder';
 import { FormContacts } from './components/view/FormContacts';
 import { Success } from './components/view/Success';
-import { IBasketItem, ICard } from './types';
+import { IBasketItem, ICard, IFormContacts, IFormOrder, PaymentMethods } from './types';
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
@@ -31,6 +32,7 @@ const events = new EventBroker();
 const api = new ApiModel(SUPABASE_URL, SUPABASE_API_KEY);
 const catalog = new CatalogModel([], events);
 const basketModel = new BasketModel({}, events);
+const orderModel = new OrderModel({}, events);
 
 const page = new Page(document.body, events);
 const modal = new Modal(modalTemplate, events);
@@ -78,19 +80,18 @@ events.on('catalog:selectCard', (card: ICard) => {
 
 events.on('product:toBasket', async ({previewCard, card}: {previewCard: Card, card: ICard}) => {
   try {
-    previewCard.switchButtonText(true);
+    previewCard.switchButton('Добавляется...', true);
     const product = await api.addProductBasket(card);
-    events.emit('basket:changed', product);
+    events.emit('basket:addItems', product);
   } catch (err) {
     console.log(`Ошибка добавления товара в корзину: ${err}`);
   } finally {
-    previewCard.switchButtonText(false);
+    previewCard.switchButton('В корзину', false);
   }
   modal.close();
 });
 
 events.on('basket:open', () => {
-  // basket.total = basketModel.total;
   basket.items = basketModel.products.map((item, i) => {
     const basketItem = new BasketItem(cloneTemplate(basketItemTemplate), 'basket__item', events);
     basketItem.index = i + 1;
@@ -113,6 +114,7 @@ events.on('basket:removeItem', (item: IBasketItem) => {
 });
 
 events.on('basket:order', () => {
+  formOrder.valid = false;
   modal.render({content: formOrder.render()});
 });
 
@@ -126,4 +128,30 @@ events.on('modal:close', () => {
 
 events.on('success:close', () => {
   modal.close();
+});
+
+events.on('address:change', (data: { field: keyof IFormOrder, value: string }) => {
+  orderModel.address = data.value;
+  orderModel.validateAddress();
+});
+
+events.on('formOrderErrors:change', (data: { errors: Partial<IFormOrder>, valid: boolean }) => {
+  formOrder.errors = Object.values(data.errors).join(',\n ');
+  console.log(data.valid);
+  formOrder.valid = data.valid;
+});
+
+events.on('email:change', (data: { field: keyof IFormContacts, value: string }) => {
+  orderModel.email = data.value;
+  orderModel.validateEmail();
+});
+
+events.on('phone:change', (data: { field: keyof IFormContacts, value: string }) => {
+  orderModel.phone = data.value;
+  orderModel.validatePhone();
+});
+
+events.on('formOrderContacts:change', (data: { errors: Partial<IFormOrder>, valid: boolean }) => {
+  formContacts.errors = Object.values(data.errors).join(', ');
+  formOrder.valid = data.valid;
 });

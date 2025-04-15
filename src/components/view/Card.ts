@@ -9,7 +9,7 @@ export class Card extends Component<ICard> {
   protected _title: HTMLElement;
   protected _text: HTMLElement;
   protected _price: HTMLElement;
-  protected _button: HTMLElement;
+  protected _button: HTMLButtonElement;
 
   constructor(container: HTMLElement, protected blockName: string, actions?: ICardActions) {
     super(container);
@@ -28,12 +28,9 @@ export class Card extends Component<ICard> {
     }
   }
 
-  switchButtonText(val: boolean) {
-    if (val) {
-      this.setText(this._button, 'Добавляется...');
-    } else {
-      this.setText(this._button, 'В корзину');
-    }
+  switchButton(text: string, val: boolean) {
+    this.setText(this._button, text);
+    this._button.disabled = val;
   }
 
   set productId(val: string) {

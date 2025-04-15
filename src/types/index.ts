@@ -16,7 +16,12 @@ export interface IBasketItem {
   price: number;
 }
 
-export type CategoryType = 'Neon Comfort' | 'Gravity Shelves' | 'Holo Shine' | 'Pixel Lounge' | 'Cyber Desks';
+export type CategoryType =
+  | 'Neon Comfort'
+  | 'Gravity Shelves'
+  | 'Holo Shine'
+  | 'Pixel Lounge'
+  | 'Cyber Desks';
 
 export interface ICard {
   id: string;
@@ -31,9 +36,9 @@ export interface ICardActions {
   onClick: (event: MouseEvent) => void;
 }
 
-export interface IForm {
+export interface IFormValidation {
   valid: boolean;
-  // errors: Partial<>
+  errors: Partial<Record<keyof IOrder, string>>
 }
 
 export type PaymentMethods = 'online' | 'cash';
@@ -61,3 +66,5 @@ export interface IPage {
 export interface ISuccess {
   total: number;
 }
+
+export type IOrder = IFormOrder & IFormContacts & IFormValidation;
