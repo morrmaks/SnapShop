@@ -7,7 +7,7 @@ export class Form<T> extends Component<IFormValidation> {
   protected _submitButton: HTMLButtonElement;
   protected _errors: HTMLElement;
 
-  constructor(container: HTMLFormElement, protected events: IEvents) {
+  constructor(protected container: HTMLFormElement, protected events: IEvents) {
     super(container);
 
     this._submitButton = ensureElement<HTMLButtonElement>('.button[type=submit]', container);
@@ -18,7 +18,12 @@ export class Form<T> extends Component<IFormValidation> {
       const field = target.name as keyof T;
       const value = target.value;
       this.onInputChange(field, value);
-    })
+    });
+
+    this.container.addEventListener('submit', (evt) => {
+     evt.preventDefault();
+     this.events.emit(`${this.container.name}:submit`);
+    });
   }
 
   onInputChange(field: keyof T, value: string) {
@@ -31,5 +36,11 @@ export class Form<T> extends Component<IFormValidation> {
 
   set errors(value: string) {
     this.setText(this._errors, value);
+  }
+
+  render(data?: Partial<T> & IFormValidation) {
+    const {valid, errors, ...inputs} = data;
+    super.render({ valid });
+    return this.container;
   }
 }

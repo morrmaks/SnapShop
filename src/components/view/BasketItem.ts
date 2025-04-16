@@ -6,6 +6,7 @@ import { IBasketItem } from '../../types';
 
 export class BasketItem extends Component<IBasketItem> {
   id: string;
+  productId: string;
   protected _index: HTMLElement;
   protected _title: HTMLElement;
   protected _price: HTMLElement;
@@ -21,7 +22,7 @@ export class BasketItem extends Component<IBasketItem> {
 
     this._delete.addEventListener('click', () => {
       this.container.remove();
-      events.emit('basket:removeItem', this);
+      events.emit('basket:delete', this);
     });
   }
 

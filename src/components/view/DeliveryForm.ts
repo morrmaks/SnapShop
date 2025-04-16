@@ -1,14 +1,14 @@
 import { IEvents } from '../../types/base/EventBroker';
-import { IFormOrder, PaymentMethods } from '../../types';
+import { IDeliveryForm, PaymentMethods } from '../../types';
 import { Form } from './Form';
 import { ensureElement } from '../../utils/utils';
 
-export class FormOrder extends Form<IFormOrder>{
+export class DeliveryForm extends Form<IDeliveryForm>{
   protected _paymentOnline: HTMLInputElement;
   protected _paymentCash: HTMLInputElement;
   protected _address: HTMLInputElement;
 
-  constructor(container: HTMLFormElement, events: IEvents) {
+  constructor(protected container: HTMLFormElement, events: IEvents) {
     super(container, events);
 
     this._paymentOnline = ensureElement<HTMLInputElement>('.order__input[value=online]', container);

@@ -32,7 +32,7 @@ export class ApiModel extends Api implements IApiModel {
   async addProductBasket(product: IBasketItem): Promise<IBasketItem[]> {
     const insertObject = {
       ...product,
-      product_id: product.id
+      productId: product.id
     }
     delete insertObject.id;
 
@@ -50,4 +50,6 @@ export class ApiModel extends Api implements IApiModel {
       .eq('id', product.id);
     return this._processResponse<IBasketItem[]>(res);
   }
+
+  // async addOrder(orderDetails)
 }

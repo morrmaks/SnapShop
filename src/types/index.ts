@@ -14,6 +14,7 @@ export interface IBasketItem {
   id: string;
   title: string;
   price: number;
+  productId?: string;
 }
 
 export type CategoryType =
@@ -43,12 +44,12 @@ export interface IFormValidation {
 
 export type PaymentMethods = 'online' | 'cash';
 
-export interface IFormContacts {
+export interface IContactsForm {
   email: string;
   phone: string;
 }
 
-export interface IFormOrder {
+export interface IDeliveryForm {
   payment: PaymentMethods;
   address: string;
 }
@@ -67,4 +68,4 @@ export interface ISuccess {
   total: number;
 }
 
-export type IOrder = IFormOrder & IFormContacts & IFormValidation;
+export type IOrder = IDeliveryForm & IContactsForm & IFormValidation;

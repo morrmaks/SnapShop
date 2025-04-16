@@ -5,16 +5,18 @@ import { cloneTemplate, ensureElement } from './utils/utils';
 import { ApiModel } from './components/model/ApiModel';
 import { CatalogModel } from './components/model/CatalogModel';
 import { BasketModel } from './components/model/BasketModel';
+import { DeliveryModel } from './components/model/DeliveryModel';
+import { ContactsModel } from './components/model/ContactsModel';
 import { OrderModel } from './components/model/OrderModel';
 import { Page } from './components/view/Page';
 import { Card } from './components/view/Card';
 import { Modal } from './components/view/Modal';
 import { Basket } from './components/view/Basket';
 import { BasketItem } from './components/view/BasketItem';
-import { FormOrder } from './components/view/FormOrder';
-import { FormContacts } from './components/view/FormContacts';
+import { DeliveryForm } from './components/view/DeliveryForm';
+import { ContactsForm } from './components/view/ContactsForm';
 import { Success } from './components/view/Success';
-import { IBasketItem, ICard, IFormContacts, IFormOrder, PaymentMethods } from './types';
+import { IBasketItem, ICard, IDeliveryForm, IContactsForm, PaymentMethods } from './types';
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
@@ -32,13 +34,15 @@ const events = new EventBroker();
 const api = new ApiModel(SUPABASE_URL, SUPABASE_API_KEY);
 const catalog = new CatalogModel([], events);
 const basketModel = new BasketModel({}, events);
+const deliveryModel = new DeliveryModel({}, events);
+const contactsModel = new ContactsModel({}, events);
 const orderModel = new OrderModel({}, events);
 
 const page = new Page(document.body, events);
 const modal = new Modal(modalTemplate, events);
 const basket = new Basket(cloneTemplate(basketTemplate), 'basket', events);
-const formOrder = new FormOrder(cloneTemplate(orderTemplate), events);
-const formContacts = new FormContacts(cloneTemplate(contactsTemplate), events);
+const deliveryForm = new DeliveryForm(cloneTemplate(orderTemplate), events);
+const formContacts = new ContactsForm(cloneTemplate(contactsTemplate), events);
 const success = new Success(cloneTemplate(successTemplate), events);
 
 async function initialazeApp() {
@@ -102,7 +106,7 @@ events.on('basket:open', () => {
   })
 });
 
-events.on('basket:removeItem', (item: IBasketItem) => {
+events.on('basket:delete', (item: IBasketItem) => {
   try {
     api.deleteProductBasket(item);
     basketModel.removeFromBasket(item);
@@ -114,8 +118,10 @@ events.on('basket:removeItem', (item: IBasketItem) => {
 });
 
 events.on('basket:order', () => {
-  formOrder.valid = false;
-  modal.render({content: formOrder.render()});
+  orderModel.items = basketModel.products.map(item => {return item.productId});
+  orderModel.total = basketModel.total;
+  console.log(deliveryModel);
+  modal.render({content: deliveryForm.render(deliveryModel)});
 });
 
 events.on('modal:open', () => {
@@ -126,32 +132,37 @@ events.on('modal:close', () => {
   page.locked = false;
 });
 
+events.on('address:change', (data: { field: keyof IDeliveryForm, value: string }) => {
+  deliveryModel.validateAddress(data.value);
+});
+
+events.on('deliveryFormErrors:change', (data: { errors: Partial<IDeliveryForm>, valid: boolean }) => {
+  deliveryForm.errors = Object.values(data.errors).join(',\n ');
+  deliveryForm.valid = data.valid;
+});
+
+events.on('email:change', (data: { field: keyof IContactsForm, value: string }) => {
+  contactsModel.validateEmail(data.value);
+});
+
+events.on('phone:change', (data: { field: keyof IContactsForm, value: string }) => {
+  contactsModel.validatePhone(data.value);
+});
+
+events.on('contactsFormErrors:change', (data: { errors: Partial<IContactsForm>, valid: boolean }) => {
+  formContacts.errors = Object.values(data.errors).join(',\n ');
+  formContacts.valid = data.valid;
+});
+
+events.on('order:submit', () => {
+  orderModel.reset();
+  modal.render({content: formContacts.render(contactsModel)});
+});
+
+events.on('contacts:submit', () => {
+  modal.render({content: success.render({ total: orderModel.total })});
+});
+
 events.on('success:close', () => {
   modal.close();
-});
-
-events.on('address:change', (data: { field: keyof IFormOrder, value: string }) => {
-  orderModel.address = data.value;
-  orderModel.validateAddress();
-});
-
-events.on('formOrderErrors:change', (data: { errors: Partial<IFormOrder>, valid: boolean }) => {
-  formOrder.errors = Object.values(data.errors).join(',\n ');
-  console.log(data.valid);
-  formOrder.valid = data.valid;
-});
-
-events.on('email:change', (data: { field: keyof IFormContacts, value: string }) => {
-  orderModel.email = data.value;
-  orderModel.validateEmail();
-});
-
-events.on('phone:change', (data: { field: keyof IFormContacts, value: string }) => {
-  orderModel.phone = data.value;
-  orderModel.validatePhone();
-});
-
-events.on('formOrderContacts:change', (data: { errors: Partial<IFormOrder>, valid: boolean }) => {
-  formContacts.errors = Object.values(data.errors).join(', ');
-  formOrder.valid = data.valid;
 });
