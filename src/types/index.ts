@@ -68,4 +68,9 @@ export interface ISuccess {
   total: number;
 }
 
-export type IOrder = IDeliveryForm & IContactsForm & IFormValidation;
+export type IOrder = {
+  items: string[];
+  total: number | null;
+} & IDeliveryForm & IContactsForm & IFormValidation;
+
+export type IOrderLot = Omit<IOrder, keyof IFormValidation>;

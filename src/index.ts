@@ -49,7 +49,7 @@ async function initialazeApp() {
   try {
     const [products, basketList] = await api.initialCatalogAndBasket();
     catalog.setProducts(products);
-    events.emit('basket:addItems', basketList);
+    events.emit('basket:addItem', basketList);
   } catch (err) {
     console.log(`Ошибка загрузки данных: ${err}`);
   } finally {
@@ -68,11 +68,6 @@ events.on('products:changed', (cards: ICard[]) => {
   });
 });
 
-events.on('basket:addItems', (products: IBasketItem | IBasketItem[]) => {
-  basketModel.addToBasket(products);
-  page.counter = basketModel.products.length;
-})
-
 events.on('catalog:selectCard', (card: ICard) => {
   const previewCard = new Card(cloneTemplate(cardPreviewTemplate), 'card', {
     onClick: ()=> events.emit('product:toBasket', {previewCard, card})
@@ -86,7 +81,7 @@ events.on('product:toBasket', async ({previewCard, card}: {previewCard: Card, ca
   try {
     previewCard.switchButton('Добавляется...', true);
     const product = await api.addProductBasket(card);
-    events.emit('basket:addItems', product);
+    events.emit('basket:addItem', product);
   } catch (err) {
     console.log(`Ошибка добавления товара в корзину: ${err}`);
   } finally {
@@ -94,6 +89,11 @@ events.on('product:toBasket', async ({previewCard, card}: {previewCard: Card, ca
   }
   modal.close();
 });
+
+events.on('basket:addItem', (products: IBasketItem | IBasketItem[]) => {
+  basketModel.addToBasket(products);
+  events.emit('basket:change');
+})
 
 events.on('basket:open', () => {
   basket.items = basketModel.products.map((item, i) => {
@@ -111,17 +111,30 @@ events.on('basket:delete', (item: IBasketItem) => {
     api.deleteProductBasket(item);
     basketModel.removeFromBasket(item);
     basket.total = basketModel.total;
-    page.counter = basketModel.products.length;
+    events.emit('basket:change');
   } catch (err) {
     console.log(`Ошибка удаления товара из корзины: ${err}`);
+  }
+});
+
+events.on('basket:clear', async (item: IBasketItem) => {
+  try {
+    const res = await api.clearBasket();
+    basketModel.clearBasket();
+    events.emit('basket:change');
+  } catch (res) {
+    console.log(`Ошибка очистки корзины: ${res}`);
   }
 });
 
 events.on('basket:order', () => {
   orderModel.items = basketModel.products.map(item => {return item.productId});
   orderModel.total = basketModel.total;
-  console.log(deliveryModel);
   modal.render({content: deliveryForm.render(deliveryModel)});
+});
+
+events.on('basket:change', () => {
+  page.counter = basketModel.products.length;
 });
 
 events.on('modal:open', () => {
@@ -132,8 +145,13 @@ events.on('modal:close', () => {
   page.locked = false;
 });
 
+events.on('payment:change', (data: { field: keyof IDeliveryForm, value: PaymentMethods }) => {
+  orderModel.payment = data.value;
+});
+
 events.on('address:change', (data: { field: keyof IDeliveryForm, value: string }) => {
   deliveryModel.validateAddress(data.value);
+  orderModel.address = data.value;
 });
 
 events.on('deliveryFormErrors:change', (data: { errors: Partial<IDeliveryForm>, valid: boolean }) => {
@@ -143,10 +161,12 @@ events.on('deliveryFormErrors:change', (data: { errors: Partial<IDeliveryForm>, 
 
 events.on('email:change', (data: { field: keyof IContactsForm, value: string }) => {
   contactsModel.validateEmail(data.value);
+  orderModel.email = data.value;
 });
 
 events.on('phone:change', (data: { field: keyof IContactsForm, value: string }) => {
   contactsModel.validatePhone(data.value);
+  orderModel.phone = data.value;
 });
 
 events.on('contactsFormErrors:change', (data: { errors: Partial<IContactsForm>, valid: boolean }) => {
@@ -159,7 +179,16 @@ events.on('order:submit', () => {
   modal.render({content: formContacts.render(contactsModel)});
 });
 
-events.on('contacts:submit', () => {
+events.on('contacts:submit', async () => {
+  try {
+    await api.addOrder(orderModel.orderData);
+    events.emit('basket:clear');
+    orderModel.clearOrder();
+    deliveryModel.reset();
+    contactsModel.reset();
+  } catch (err) {
+    console.log(`Ошибка отправки заказа: ${err}`);
+  }
   modal.render({content: success.render({ total: orderModel.total })});
 });
 

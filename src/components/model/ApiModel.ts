@@ -1,5 +1,5 @@
 import { Api } from '../base/Api';
-import { IApiModel, IBasketItem, ICard } from '../../types';
+import { IApiModel, IBasketItem, ICard, IOrder, IOrderLot } from '../../types';
 
 export class ApiModel extends Api implements IApiModel {
   constructor(supabaseUrl: string, supabaseKey: string) {
@@ -51,5 +51,20 @@ export class ApiModel extends Api implements IApiModel {
     return this._processResponse<IBasketItem[]>(res);
   }
 
-  // async addOrder(orderDetails)
+  async clearBasket() {
+    const res = await this.supabase
+      .from('basket')
+      .delete()
+      .not('id', 'is', null);
+    // console.log(res);
+    return this._processResponse(res);
+  }
+
+  async addOrder(order: IOrderLot): Promise<IOrder[]> {
+    const res = await this.supabase
+      .from('orders')
+      .insert([order])
+      .select();
+    return this._processResponse<IOrder[]>(res);
+  }
 }

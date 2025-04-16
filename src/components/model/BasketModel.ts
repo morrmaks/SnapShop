@@ -22,4 +22,9 @@ export class BasketModel extends Model<ICard> {
     this.products = this.products.filter(item => item.id !== product.id);
     this.total = this.getTotalBasketPrice();
   }
+
+  clearBasket() {
+    this.products = [];
+    this.total = this.getTotalBasketPrice();
+  }
 }
