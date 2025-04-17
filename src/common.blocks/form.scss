@@ -68,7 +68,15 @@
 
   &__errors {
     color: $error;
-    font-size: nth($mainFontSize, 2);
+    font-size: nth($smallFontSize, 3);
     white-space: pre-line;
+
+    @media (max-width: 910px) {
+      font-size: nth($smallFontSize, 2);
+    }
+
+    @media (max-width: 560px) {
+      font-size: nth($smallFontSize, 1);
+    }
   }
 }

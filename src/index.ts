@@ -183,13 +183,13 @@ events.on('contacts:submit', async () => {
   try {
     await api.addOrder(orderModel.orderData);
     events.emit('basket:clear');
-    orderModel.clearOrder();
     deliveryModel.reset();
     contactsModel.reset();
   } catch (err) {
     console.log(`Ошибка отправки заказа: ${err}`);
   }
   modal.render({content: success.render({ total: orderModel.total })});
+  orderModel.clearOrder();
 });
 
 events.on('success:close', () => {
