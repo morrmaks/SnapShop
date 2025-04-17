@@ -70,7 +70,7 @@ events.on('products:changed', (cards: ICard[]) => {
 
 events.on('catalog:selectCard', (card: ICard) => {
   const previewCard = new Card(cloneTemplate(cardPreviewTemplate), 'card', {
-    onClick: ()=> events.emit('product:toBasket', {previewCard, card})
+    onClick: (evt)=> events.emit('product:toBasket', {previewCard, card})
   })
   modal.render({
     content: previewCard.render(card)
@@ -138,11 +138,11 @@ events.on('basket:change', () => {
 });
 
 events.on('modal:open', () => {
-  page.locked = true;
+  page.freeze();
 });
 
 events.on('modal:close', () => {
-  page.locked = false;
+  page.unfreeze();
 });
 
 events.on('payment:change', (data: { field: keyof IDeliveryForm, value: PaymentMethods }) => {

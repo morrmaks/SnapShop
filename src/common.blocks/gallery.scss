@@ -8,9 +8,6 @@
   @media (max-width: 560px) {
     grid-template-columns: 1fr;
     gap: $minPadding;
-  }
-
-  @media (max-width: 560px) {
     padding: 40px $minPadding 80px;
   }
 

@@ -22,6 +22,20 @@ export class Page extends Component<IPage> {
     });
   }
 
+  freeze() {
+    const scrollY = window.scrollY;
+
+    this.locked = true;
+    this._wrapper.style.top = `-${scrollY}px`;
+  }
+
+  unfreeze() {
+    const scrollY = parseInt(this._wrapper.style.top) * -1;
+
+    this.locked = false;
+    this._wrapper.style.top = '';
+    window.scrollTo({ top: scrollY, behavior: 'auto' });
+  }
 
   set counter(value: number) {
     this.setText(this._counter, value);
