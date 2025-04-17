@@ -11,6 +11,7 @@ import { OrderModel } from './components/model/OrderModel';
 import { Page } from './components/view/Page';
 import { Card } from './components/view/Card';
 import { Modal } from './components/view/Modal';
+import { Loader } from './components/view/Loader';
 import { Basket } from './components/view/Basket';
 import { BasketItem } from './components/view/BasketItem';
 import { DeliveryForm } from './components/view/DeliveryForm';
@@ -22,6 +23,7 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
 
 const modalTemplate = ensureElement<HTMLElement>('#modal-container')
+const loaderTemplate = ensureElement<HTMLElement>('#loader');
 const cardItemTemplate = ensureElement<HTMLTemplateElement>('#card-item');
 const cardPreviewTemplate = ensureElement<HTMLTemplateElement>('#card-preview');
 const basketItemTemplate = ensureElement<HTMLTemplateElement>('#basket-item');
@@ -40,6 +42,7 @@ const orderModel = new OrderModel({}, events);
 
 const page = new Page(document.body, events);
 const modal = new Modal(modalTemplate, events);
+const loader = new Loader(loaderTemplate);
 const basket = new Basket(cloneTemplate(basketTemplate), 'basket', events);
 const deliveryForm = new DeliveryForm(cloneTemplate(orderTemplate), events);
 const formContacts = new ContactsForm(cloneTemplate(contactsTemplate), events);
@@ -47,13 +50,14 @@ const success = new Success(cloneTemplate(successTemplate), events);
 
 async function initialazeApp() {
   try {
+    loader.show();
     const [products, basketList] = await api.initialCatalogAndBasket();
     catalog.setProducts(products);
     events.emit('basket:addItem', basketList);
   } catch (err) {
     console.log(`Ошибка загрузки данных: ${err}`);
   } finally {
-
+    loader.hide();
   }
 }
 
