@@ -26,12 +26,3 @@
   gap: $gap;
   grid-auto-flow: $autoFlow;
 }
-
-$breakpoints: (md: 100px, lg: 200px);
-
-@mixin media($maxWidth) {
-  $width: map-get($breakpoints, $maxWidth);
-  @media (max-width: $width) {
-    @content;
-  }
-}
