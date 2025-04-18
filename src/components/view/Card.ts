@@ -18,8 +18,8 @@ export class Card extends Component<ICard> {
     this._title = ensureElement<HTMLElement>(`.${blockName}__title`, container);
     this._image = ensureElement<HTMLImageElement>(`.${blockName}__image`, container);
     this._price = ensureElement<HTMLElement>(`.${blockName}__price`, container);
-    this._text = ensureElement<HTMLElement>(`.${blockName}__text`, container);
-    this._button = ensureElement<HTMLButtonElement>(`.${blockName}__button`, container);
+    this._text = container.querySelector(`.${blockName}__text`);
+    this._button = container.querySelector(`.${blockName}__button`);
 
     if (this._button) {
       this._button.addEventListener('click', actions.onClick);
@@ -33,7 +33,7 @@ export class Card extends Component<ICard> {
     this._button.disabled = val;
   }
 
-  set productId(val: string) {
+  set id(val: string) {
     this.container.dataset.id = val;
   }
 

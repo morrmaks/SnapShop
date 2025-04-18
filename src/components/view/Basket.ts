@@ -16,7 +16,7 @@ export class Basket extends Component<IBasket> {
     this._button = ensureElement<HTMLButtonElement>(`.${blockName}__button`, container);
 
     this._button.addEventListener('click', () => {
-      this.events.emit('basket:order');
+      this.events.emit('order:begin');
     });
   }
 

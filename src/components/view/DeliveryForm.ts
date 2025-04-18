@@ -16,12 +16,12 @@ export class DeliveryForm extends Form<IDeliveryForm>{
     this._address = ensureElement<HTMLInputElement>('.form__input[name=address]', container);
   }
 
-  set address(value: string) {
-    this._address.value = value;
+  set address(val: string) {
+    this._address.value = val;
   }
 
-  set payment(value: PaymentMethods) {
-    this._paymentOnline.checked = value === 'online';
-    this._paymentCash.checked = value === 'cash';
+  set payment(val: PaymentMethods) {
+    this._paymentOnline.checked = val === 'online';
+    this._paymentCash.checked = val === 'cash';
   }
 }

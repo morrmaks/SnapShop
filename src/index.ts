@@ -63,7 +63,7 @@ async function initialazeApp() {
 
 initialazeApp();
 
-events.on('products:changed', (cards: ICard[]) => {
+events.on('catalog:render', (cards: ICard[]) => {
   page.catalog = cards.map(card => {
     const catalogCard = new Card(cloneTemplate(cardItemTemplate), 'card', {
       onClick: ()=> events.emit('catalog:selectCard', card)
@@ -74,14 +74,14 @@ events.on('products:changed', (cards: ICard[]) => {
 
 events.on('catalog:selectCard', (card: ICard) => {
   const previewCard = new Card(cloneTemplate(cardPreviewTemplate), 'card', {
-    onClick: (evt)=> events.emit('product:toBasket', {previewCard, card})
+    onClick: (evt)=> events.emit('product:addToBasket', {previewCard, card})
   })
   modal.render({
     content: previewCard.render(card)
   })
 })
 
-events.on('product:toBasket', async ({previewCard, card}: {previewCard: Card, card: ICard}) => {
+events.on('product:addToBasket', async ({previewCard, card}: {previewCard: Card, card: ICard}) => {
   try {
     previewCard.switchButton('Добавляется...', true);
     const product = await api.addProductBasket(card);
@@ -94,12 +94,37 @@ events.on('product:toBasket', async ({previewCard, card}: {previewCard: Card, ca
   modal.close();
 });
 
+events.on('basket:updated', () => {
+  page.counter = basketModel.products.length;
+});
+
 events.on('basket:addItem', (products: IBasketItem | IBasketItem[]) => {
   basketModel.addToBasket(products);
-  events.emit('basket:change');
+  events.emit('basket:updated');
 })
 
-events.on('basket:open', () => {
+events.on('basket:removeItem', (item: IBasketItem) => {
+  try {
+    api.deleteProductBasket(item);
+    basketModel.removeFromBasket(item);
+    basket.total = basketModel.total;
+    events.emit('basket:updated');
+  } catch (err) {
+    console.log(`Ошибка удаления товара из корзины: ${err}`);
+  }
+});
+
+events.on('basket:clear', async (item: IBasketItem) => {
+  try {
+    const res = await api.clearBasket();
+    basketModel.clearBasket();
+    events.emit('basket:updated');
+  } catch (res) {
+    console.log(`Ошибка очистки корзины: ${res}`);
+  }
+});
+
+events.on('modal:openBasket', () => {
   basket.items = basketModel.products.map((item, i) => {
     const basketItem = new BasketItem(cloneTemplate(basketItemTemplate), 'basket__item', events);
     basketItem.index = i + 1;
@@ -110,43 +135,18 @@ events.on('basket:open', () => {
   })
 });
 
-events.on('basket:delete', (item: IBasketItem) => {
-  try {
-    api.deleteProductBasket(item);
-    basketModel.removeFromBasket(item);
-    basket.total = basketModel.total;
-    events.emit('basket:change');
-  } catch (err) {
-    console.log(`Ошибка удаления товара из корзины: ${err}`);
-  }
-});
-
-events.on('basket:clear', async (item: IBasketItem) => {
-  try {
-    const res = await api.clearBasket();
-    basketModel.clearBasket();
-    events.emit('basket:change');
-  } catch (res) {
-    console.log(`Ошибка очистки корзины: ${res}`);
-  }
-});
-
-events.on('basket:order', () => {
-  orderModel.items = basketModel.products.map(item => {return item.productId});
-  orderModel.total = basketModel.total;
-  modal.render({content: deliveryForm.render(deliveryModel)});
-});
-
-events.on('basket:change', () => {
-  page.counter = basketModel.products.length;
-});
-
 events.on('modal:open', () => {
   page.freeze();
 });
 
 events.on('modal:close', () => {
   page.unfreeze();
+});
+
+events.on('order:begin', () => {
+  orderModel.items = basketModel.products.map(item => {return item.productId});
+  orderModel.total = basketModel.total;
+  modal.render({content: deliveryForm.render(deliveryModel)});
 });
 
 events.on('payment:change', (data: { field: keyof IDeliveryForm, value: PaymentMethods }) => {
@@ -199,3 +199,5 @@ events.on('contacts:submit', async () => {
 events.on('success:close', () => {
   modal.close();
 });
+
+console.log(events);

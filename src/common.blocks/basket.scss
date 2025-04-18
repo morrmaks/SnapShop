@@ -39,13 +39,11 @@
     }
 
     &-info {
-      @include mixins.flex(row);
+      @include mixins.grid(column, 10px, row);
       min-width: 0;
       grid-column: 2 / 3;
       justify-content: space-between;
       align-items: center;
-      gap: 10px 40px;
-      flex-wrap: wrap;
     }
 
     &-index {

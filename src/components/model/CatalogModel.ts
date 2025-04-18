@@ -6,6 +6,6 @@ export class CatalogModel extends Model<ICard[]> {
 
   setProducts(cards: ICard[]) {
     cards.forEach(card => this.products.push(card));
-    this.emitChanges('products:changed', this.products);
+    this.emitChanges('catalog:render', this.products);
   }
 }

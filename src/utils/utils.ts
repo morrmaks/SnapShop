@@ -18,7 +18,7 @@ export function ensureAllElements<T extends HTMLElement>(selectorElement: Select
   if (Array.isArray(selectorElement)) {
     return selectorElement;
   }
-  throw new Error(`Unknown selector element: ${selectorElement}`);
+  throw new Error(`Не удалось распознать селектор: ${selectorElement}`);
 }
 
 export type SelectorElement<T> = T | string;
@@ -27,17 +27,17 @@ export function ensureElement<T extends HTMLElement>(selectorElement: SelectorEl
   if (isSelector(selectorElement)) {
     const elements = ensureAllElements<T>(selectorElement, context);
     if (elements.length > 1) {
-      console.warn(`Selector ${selectorElement} return more then one element`);
+      console.warn(`Найдено более одного элемента по селектору: ${selectorElement}`);
     }
     if (elements.length === 0) {
-      console.warn(`Selector ${selectorElement} return nothing`);
+      console.warn(`По селектору ${selectorElement} не найдено ни одного элемента`);
     }
     return elements.pop() as T;
   }
   if (selectorElement instanceof HTMLElement) {
     return selectorElement as T;
   }
-  throw new Error(`Unknown selector element: ${selectorElement}`);
+  throw new Error(`Не удалось распознать селектор: ${selectorElement}`);
 }
 
 export function cloneTemplate<T extends HTMLElement>(query: string | HTMLTemplateElement): T {

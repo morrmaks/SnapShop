@@ -53,12 +53,8 @@ export class Modal extends Component<IModal> {
     }
   }
 
-  set content(value: HTMLElement) {
-    this._content.replaceChildren(value);
-  }
-
-  set loader(value: HTMLElement) {
-    this.container.replaceChildren(value);
+  set content(val: HTMLElement) {
+    this._content.replaceChildren(val);
   }
 
   render(data: IModal): HTMLElement {

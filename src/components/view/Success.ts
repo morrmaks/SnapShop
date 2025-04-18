@@ -18,7 +18,7 @@ export class Success extends Component<ISuccess>{
     });
   }
 
-  set total(value: number) {
-    this.setText(this._description, `Списано ${value} тугриков`);
+  set total(val: number) {
+    this.setText(this._description, `Списано ${val} тугриков`);
   }
 }

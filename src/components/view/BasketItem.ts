@@ -22,25 +22,19 @@ export class BasketItem extends Component<IBasketItem> {
 
     this._delete.addEventListener('click', () => {
       this.container.remove();
-      events.emit('basket:delete', this);
+      events.emit('basket:removeItem', this);
     });
   }
 
-  set index(value: number) {
-    this.setText(this._index, value);
+  set index(val: number) {
+    this.setText(this._index, val);
   }
 
-  set title(value: string) {
-    this.setText(this._title, value);
+  set title(val: string) {
+    this.setText(this._title, val);
   }
 
-  set price(value: string) {
-    this.setText(this._price, value);
+  set price(val: string) {
+    this.setText(this._price, `${val} тг`);
   }
-
-  // render(data: IBasketItem, index: number): HTMLElement {
-  //   super.render(data);
-  //   this.index = index;
-  //   return this.container;
-  // }
 }

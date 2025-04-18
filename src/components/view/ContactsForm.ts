@@ -14,11 +14,11 @@ export class ContactsForm extends Form<IContactsForm>{
     this._phone = ensureElement<HTMLInputElement>('.form__input[name=phone]', container);
   }
 
-  set email(value: string) {
-    this._email.value = value;
+  set email(val: string) {
+    this._email.value = val;
   }
 
-  set phone(value: string) {
-    this._phone.value = value;
+  set phone(val: string) {
+    this._phone.value = val;
   }
 }

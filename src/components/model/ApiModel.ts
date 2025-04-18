@@ -56,7 +56,6 @@ export class ApiModel extends Api implements IApiModel {
       .from('basket')
       .delete()
       .not('id', 'is', null);
-    // console.log(res);
     return this._processResponse(res);
   }
 
