@@ -18,6 +18,11 @@ export abstract class Component<T> {
     }
   }
 
+  switchButton(button: HTMLButtonElement, text: string, val: boolean) {
+    this.setText(button, text);
+    button.disabled = val;
+  }
+
   protected hide(): void {
     this.container.style.display = 'none';
   }
@@ -26,7 +31,6 @@ export abstract class Component<T> {
     this.container.style.removeProperty('display');
   }
 
-  //принимает свойства со значениями и меняет их в классе
   render(data?: Partial<T>): HTMLElement {
     Object.assign(this, data ?? {});
     return this.container;

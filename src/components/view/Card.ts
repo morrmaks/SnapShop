@@ -28,9 +28,8 @@ export class Card extends Component<ICard> {
     }
   }
 
-  switchButton(text: string, val: boolean) {
-    this.setText(this._button, text);
-    this._button.disabled = val;
+  switchButtonState(text: string, val: boolean) {
+    this.switchButton(this._button, text, val);
   }
 
   set id(val: string) {

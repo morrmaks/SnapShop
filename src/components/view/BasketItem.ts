@@ -21,7 +21,6 @@ export class BasketItem extends Component<IBasketItem> {
     this._delete = ensureElement<HTMLButtonElement>(`.${blockName}-delete`, container);
 
     this._delete.addEventListener('click', () => {
-      this.container.remove();
       events.emit('basket:removeItem', this);
     });
   }

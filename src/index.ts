@@ -74,13 +74,13 @@ events.on('catalog:render', (cards: ICard[]) => {
 
 events.on('product:addToBasket', async ({previewCard, card}: {previewCard: Card, card: ICard}) => {
   try {
-    previewCard.switchButton('Добавляется...', true);
+    previewCard.switchButtonState('Добавляется...', true);
     const product = await api.addProductBasket(card);
     events.emit('basket:addItem', product);
   } catch (err) {
     console.log(`Ошибка добавления товара в корзину: ${err}`);
   } finally {
-    previewCard.switchButton('В корзину', false);
+    previewCard.switchButtonState('В корзину', false);
   }
   modal.close();
 });
@@ -94,11 +94,20 @@ events.on('basket:addItem', (products: IBasketItem | IBasketItem[]) => {
   events.emit('basket:updated');
 });
 
+function updateBasketItems() {
+  basket.items = basketModel.products.map((item, i) => {
+    const basketItem = new BasketItem(cloneTemplate(basketItemTemplate), 'basket__item', events);
+    basketItem.index = i + 1;
+    return basketItem.render(item);
+  });
+}
+
 events.on('basket:removeItem', (item: IBasketItem) => {
   try {
     api.deleteProductBasket(item);
     basketModel.removeFromBasket(item);
     basket.total = basketModel.total;
+    updateBasketItems()
     events.emit('basket:updated');
   } catch (err) {
     console.log(`Ошибка удаления товара из корзины: ${err}`);
@@ -125,14 +134,10 @@ events.on('modal:openCard', (card: ICard) => {
 });
 
 events.on('modal:openBasket', () => {
-  basket.items = basketModel.products.map((item, i) => {
-    const basketItem = new BasketItem(cloneTemplate(basketItemTemplate), 'basket__item', events);
-    basketItem.index = i + 1;
-    return basketItem.render(item);
-  });
+  updateBasketItems();
   modal.render({
     content: basket.render({total: basketModel.total})
-  })
+  });
 });
 
 events.on('modal:open', () => {
@@ -185,13 +190,17 @@ events.on('order:submit', () => {
 
 events.on('contacts:submit', async () => {
   try {
+    formContacts.switchButtonState('Заказ отправляется...', true);
     await api.addOrder(orderModel.orderData);
     events.emit('basket:clear');
     deliveryModel.reset();
     contactsModel.reset();
   } catch (err) {
     console.log(`Ошибка отправки заказа: ${err}`);
+  } finally {
+    formContacts.switchButtonState('Оплатить', true);
   }
+
   modal.render({content: success.render({ total: orderModel.total })});
   orderModel.clearOrder();
 });
@@ -199,5 +208,3 @@ events.on('contacts:submit', async () => {
 events.on('success:close', () => {
   modal.close();
 });
-
-console.log(events);

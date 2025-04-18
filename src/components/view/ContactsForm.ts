@@ -14,6 +14,10 @@ export class ContactsForm extends Form<IContactsForm>{
     this._phone = ensureElement<HTMLInputElement>('.form__input[name=phone]', container);
   }
 
+  switchButtonState(text: string, val: boolean) {
+    this.switchButton(this._submitButton, text, val);
+  }
+
   set email(val: string) {
     this._email.value = val;
   }
