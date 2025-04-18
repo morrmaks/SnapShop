@@ -66,20 +66,11 @@ initialazeApp();
 events.on('catalog:render', (cards: ICard[]) => {
   page.catalog = cards.map(card => {
     const catalogCard = new Card(cloneTemplate(cardItemTemplate), 'card', {
-      onClick: ()=> events.emit('catalog:selectCard', card)
+      onClick: ()=> events.emit('modal:openCard', card)
     });
     return catalogCard.render(card);
   });
 });
-
-events.on('catalog:selectCard', (card: ICard) => {
-  const previewCard = new Card(cloneTemplate(cardPreviewTemplate), 'card', {
-    onClick: (evt)=> events.emit('product:addToBasket', {previewCard, card})
-  })
-  modal.render({
-    content: previewCard.render(card)
-  })
-})
 
 events.on('product:addToBasket', async ({previewCard, card}: {previewCard: Card, card: ICard}) => {
   try {
@@ -101,7 +92,7 @@ events.on('basket:updated', () => {
 events.on('basket:addItem', (products: IBasketItem | IBasketItem[]) => {
   basketModel.addToBasket(products);
   events.emit('basket:updated');
-})
+});
 
 events.on('basket:removeItem', (item: IBasketItem) => {
   try {
@@ -122,6 +113,15 @@ events.on('basket:clear', async (item: IBasketItem) => {
   } catch (res) {
     console.log(`Ошибка очистки корзины: ${res}`);
   }
+});
+
+events.on('modal:openCard', (card: ICard) => {
+  const previewCard = new Card(cloneTemplate(cardPreviewTemplate), 'card', {
+    onClick: (evt)=> events.emit('product:addToBasket', {previewCard, card})
+  })
+  modal.render({
+    content: previewCard.render(card)
+  })
 });
 
 events.on('modal:openBasket', () => {

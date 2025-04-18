@@ -15,6 +15,14 @@ export class OrderModel extends Model<IOrder>  {
     return Object.keys(this.errors).length === 0;
   }
 
+  updateFormValidity(eventName: string, touched: Partial<Record<keyof IDeliveryForm | keyof IContactsForm, boolean>>) {
+    const noErrors = this.errorsIsEmpty();
+    const allFieldsTouched = Object.values(touched).every(Boolean);
+
+    this.valid = noErrors && allFieldsTouched;
+    this.events.emit(eventName, { errors: this.errors, valid: this.valid });
+  }
+
   get orderData() {
     return {
       items: this.items,
