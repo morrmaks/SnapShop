@@ -3,6 +3,8 @@ export interface IApiModel {
   getListProductBasket: () => Promise<IBasketItem[]>,
   addProductBasket:  (product: IBasketItem) => Promise<IBasketItem[]>,
   deleteProductBasket: (product: IBasketItem) => Promise<IBasketItem[]>
+  clearBasket: () => Promise<null>
+  addOrder: (order: IOrderLot) => Promise<IOrder[]>
 }
 
 export interface IBasket {

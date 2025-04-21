@@ -5,7 +5,7 @@ export class DeliveryModel extends OrderModel {
   payment: PaymentMethods = 'online';
   address: string = '';
 
-  touched: Partial<Record<keyof IDeliveryForm, boolean>> = {
+  private touched: Partial<Record<keyof IDeliveryForm, boolean>> = {
     // payment: false,
     address: false
   }

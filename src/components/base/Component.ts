@@ -23,11 +23,11 @@ export abstract class Component<T> {
     button.disabled = val;
   }
 
-  protected hide(): void {
+  protected hide() {
     this.container.style.display = 'none';
   }
 
-  protected show(): void {
+  protected show() {
     this.container.style.removeProperty('display');
   }
 

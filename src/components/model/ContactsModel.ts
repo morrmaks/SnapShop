@@ -5,7 +5,7 @@ export class ContactsModel extends OrderModel {
   email: string = '';
   phone: string = '';
 
-  touched: Partial<Record<keyof IContactsForm, boolean>> = {
+  private touched: Partial<Record<keyof IContactsForm, boolean>> = {
     email: false,
     phone: false,
   }

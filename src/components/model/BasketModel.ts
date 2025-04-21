@@ -1,11 +1,11 @@
 import { Model } from '../base/Model';
-import { IBasketItem, ICard } from '../../types';
+import { IBasketItem } from '../../types';
 
-export class BasketModel extends Model<ICard> {
+export class BasketModel extends Model<IBasketItem> {
   products: IBasketItem[] = [];
   total: number | null;
 
-  private getTotalBasketPrice() {
+  private getTotalBasketPrice(): number {
     return this.products.reduce((sum: number, product: IBasketItem) => sum + product.price, 0);
   }
 

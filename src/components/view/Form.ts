@@ -38,7 +38,7 @@ export class Form<T> extends Component<IFormValidation> {
     this.setText(this._errors, value);
   }
 
-  render(data?: Partial<T> & IFormValidation) {
+  render(data?: Partial<T> & IFormValidation): HTMLFormElement {
     const {valid, errors, ...inputs} = data;
     super.render({ valid });
     return this.container;

@@ -17,7 +17,13 @@ import { BasketItem } from './components/view/BasketItem';
 import { DeliveryForm } from './components/view/DeliveryForm';
 import { ContactsForm } from './components/view/ContactsForm';
 import { Success } from './components/view/Success';
-import { IBasketItem, ICard, IDeliveryForm, IContactsForm, PaymentMethods } from './types';
+import {
+  IBasketItem,
+  ICard,
+  IDeliveryForm,
+  IContactsForm,
+  PaymentMethods,
+} from './types';
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;

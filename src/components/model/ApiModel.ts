@@ -6,7 +6,7 @@ export class ApiModel extends Api implements IApiModel {
     super(supabaseUrl, supabaseKey);
   }
 
-  async initialCatalogAndBasket():Promise<[ICard[], IBasketItem[]]> {
+  async initialCatalogAndBasket(): Promise<[ICard[], IBasketItem[]]> {
     return await Promise.all([
       this.getListProductCard(),
       this.getListProductBasket()
@@ -51,7 +51,7 @@ export class ApiModel extends Api implements IApiModel {
     return this._processResponse<IBasketItem[]>(res);
   }
 
-  async clearBasket() {
+  async clearBasket(): Promise<null> {
     const res = await this.supabase
       .from('basket')
       .delete()
