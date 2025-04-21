@@ -37,7 +37,7 @@ export default function buildLoaders(isDev: boolean) {
       ]
     },
     {
-      test: /\.(png|svg|jpg|jpeg|gif|woff(2)?|eot|ttf|otf)$/i,
+      test: /\.(png|svg|webp|jpg|jpeg|gif|woff(2)?|eot|ttf|otf)$/i,
       type: 'asset/resource',
     },
   ]

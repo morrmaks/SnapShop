@@ -16,7 +16,7 @@
   }
 
   &::before {
-    @include mixins.background("../images/success.png", cover, center);
+    @include mixins.background("../images/success.webp", cover, center);
     content: "";
     width: 256px;
     height: 256px;

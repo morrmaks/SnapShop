@@ -10,7 +10,7 @@ export default function buildPlugins(isProd: boolean) {
   return [
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, '../src/pages/index.html'),
-        favicon: path.resolve(__dirname, '../src/public/SnapShop-favicon.svg'),
+        favicon: path.resolve(__dirname, '../src/public/SnapShop-favicon-200.png'),
       }),
       isProd && new MiniCssExtractPlugin({
         filename: 'css/[name].[contenthash:8].css', //в отдельную папку
