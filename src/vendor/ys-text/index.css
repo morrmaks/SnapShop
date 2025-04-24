@@ -1,87 +1,95 @@
 @font-face {
-  font-family: 'YS Text';
-  font-style: normal;
-  font-display: swap;
-  src: url('YS Text-Light.eot') format('embedded-opentype'),
-  url('YS Text-Light.ttf') format('truetype'),
-  url('YS Text-Light.woff') format('woff'),
-  url('YS Text-Light.woff2') format('woff2');
-  font-weight: 300;
+	font-family: 'YS Text';
+	font-style: normal;
+	font-display: swap;
+	src:
+		url('YS Text-Light.eot') format('embedded-opentype'),
+		url('YS Text-Light.ttf') format('truetype'),
+		url('YS Text-Light.woff') format('woff'),
+		url('YS Text-Light.woff2') format('woff2');
+	font-weight: 300;
 }
 
 @font-face {
-  font-family: 'YS Text';
-  font-style: italic;
-  font-display: swap;
-  src: url('YS Text-Light Italic.eot') format('embedded-opentype'),
-  url('YS Text-Light Italic.ttf') format('truetype'),
-  url('YS Text-Light Italic.woff') format('woff'),
-  url('YS Text-Light Italic.woff2') format('woff2');
-  font-weight: 300;
+	font-family: 'YS Text';
+	font-style: italic;
+	font-display: swap;
+	src:
+		url('YS Text-Light Italic.eot') format('embedded-opentype'),
+		url('YS Text-Light Italic.ttf') format('truetype'),
+		url('YS Text-Light Italic.woff') format('woff'),
+		url('YS Text-Light Italic.woff2') format('woff2');
+	font-weight: 300;
 }
 
 @font-face {
-  font-family: 'YS Text';
-  font-style: normal;
-  font-display: swap;
-  src: url('YS Text-Regular.eot') format('embedded-opentype'),
-  url('YS Text-Regular.ttf') format('truetype'),
-  url('YS Text-Regular.woff') format('woff'),
-  url('YS Text-Regular.woff2') format('woff2');
-  font-weight: 400;
+	font-family: 'YS Text';
+	font-style: normal;
+	font-display: swap;
+	src:
+		url('YS Text-Regular.eot') format('embedded-opentype'),
+		url('YS Text-Regular.ttf') format('truetype'),
+		url('YS Text-Regular.woff') format('woff'),
+		url('YS Text-Regular.woff2') format('woff2');
+	font-weight: 400;
 }
 
 @font-face {
-  font-family: 'YS Text';
-  font-style: italic;
-  font-display: swap;
-  src: url('YS Text-Regular Italic.eot') format('embedded-opentype'),
-  url('YS Text-Regular Italic.ttf') format('truetype'),
-  url('YS Text-Regular Italic.woff') format('woff'),
-  url('YS Text-Regular Italic.woff2') format('woff2');
-  font-weight: 400;
+	font-family: 'YS Text';
+	font-style: italic;
+	font-display: swap;
+	src:
+		url('YS Text-Regular Italic.eot') format('embedded-opentype'),
+		url('YS Text-Regular Italic.ttf') format('truetype'),
+		url('YS Text-Regular Italic.woff') format('woff'),
+		url('YS Text-Regular Italic.woff2') format('woff2');
+	font-weight: 400;
 }
 
 @font-face {
-  font-family: 'YS Text';
-  font-style: normal;
-  font-display: swap;
-  src: url('YS Text-Medium.eot') format('embedded-opentype'),
-  url('YS Text-Medium.ttf') format('truetype'),
-  url('YS Text-Medium.woff') format('woff'),
-  url('YS Text-Medium.woff2') format('woff2');
-  font-weight: 500;
+	font-family: 'YS Text';
+	font-style: normal;
+	font-display: swap;
+	src:
+		url('YS Text-Medium.eot') format('embedded-opentype'),
+		url('YS Text-Medium.ttf') format('truetype'),
+		url('YS Text-Medium.woff') format('woff'),
+		url('YS Text-Medium.woff2') format('woff2');
+	font-weight: 500;
 }
 
 @font-face {
-  font-family: 'YS Text';
-  font-style: italic;
-  font-display: swap;
-  src: url('YS Text-Medium Italic.eot') format('embedded-opentype'),
-  url('YS Text-Medium Italic.ttf') format('truetype'),
-  url('YS Text-Medium Italic.woff') format('woff'),
-  url('YS Text-Medium Italic.woff2') format('woff2');
-  font-weight: 500;
+	font-family: 'YS Text';
+	font-style: italic;
+	font-display: swap;
+	src:
+		url('YS Text-Medium Italic.eot') format('embedded-opentype'),
+		url('YS Text-Medium Italic.ttf') format('truetype'),
+		url('YS Text-Medium Italic.woff') format('woff'),
+		url('YS Text-Medium Italic.woff2') format('woff2');
+	font-weight: 500;
 }
 
 @font-face {
-  font-family: 'YS Text';
-  font-style: normal;
-  font-display: swap;
-  src: url('YS Text-Bold.eot') format('embedded-opentype'),
-  url('YS Text-Bold.ttf') format('truetype'),
-  url('YS Text-Bold.woff') format('woff'),
-  url('YS Text-Bold.woff2') format('woff2');
-  font-weight: 700;
+	font-family: 'YS Text';
+	font-style: normal;
+	font-display: swap;
+	src:
+		url('YS Text-Bold.eot') format('embedded-opentype'),
+		url('YS Text-Bold.ttf') format('truetype'),
+		url('YS Text-Bold.woff') format('woff'),
+		url('YS Text-Bold.woff2') format('woff2');
+	font-weight: 700;
 }
 
 @font-face {
-  font-family: 'YS Text';
-  font-style: italic;
-  font-display: swap;
-  src: url('YS Text-Bold Italic.eot') format('embedded-opentype'),
-  url('YS Text-Bold Italic.ttf') format('truetype'),
-  url('YS Text-Bold Italic.woff') format('woff'),
-  url('YS Text-Bold Italic.woff2') format('woff2');
-  font-weight: 700;
+	font-family: 'YS Text';
+	font-style: italic;
+	font-display: swap;
+	src:
+		url('YS Text-Bold Italic.eot') format('embedded-opentype'),
+		url('YS Text-Bold Italic.ttf') format('truetype'),
+		url('YS Text-Bold Italic.woff') format('woff'),
+		url('YS Text-Bold Italic.woff2') format('woff2');
+	font-weight: 700;
 }

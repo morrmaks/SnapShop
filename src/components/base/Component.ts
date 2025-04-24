@@ -1,38 +1,38 @@
 export abstract class Component<T> {
-  constructor(protected readonly container: HTMLElement) {}
+	constructor(protected readonly container: HTMLElement) {}
 
-  toggleClass(element: HTMLElement, className: string, force: boolean) {
-    element.classList.toggle(className, force);
-  }
+	toggleClass(element: HTMLElement, className: string, force: boolean) {
+		element.classList.toggle(className, force);
+	}
 
-  protected setText(element: HTMLElement, value: unknown) {
-    element.textContent = String(value);
-  }
+	protected setText(element: HTMLElement, value: unknown) {
+		element.textContent = String(value);
+	}
 
-  protected setImage(element: HTMLImageElement, src: string, alt?: string) {
-    if (element) {
-      element.src = src;
-      if (alt) {
-        element.alt = alt;
-      }
-    }
-  }
+	protected setImage(element: HTMLImageElement, src: string, alt?: string) {
+		if (element) {
+			element.src = src;
+			if (alt) {
+				element.alt = alt;
+			}
+		}
+	}
 
-  switchButton(button: HTMLButtonElement, text: string, val: boolean) {
-    this.setText(button, text);
-    button.disabled = val;
-  }
+	switchButton(button: HTMLButtonElement, text: string, val: boolean) {
+		this.setText(button, text);
+		button.disabled = val;
+	}
 
-  protected hide() {
-    this.container.style.display = 'none';
-  }
+	protected hide() {
+		this.container.style.display = 'none';
+	}
 
-  protected show() {
-    this.container.style.removeProperty('display');
-  }
+	protected show() {
+		this.container.style.removeProperty('display');
+	}
 
-  render(data?: Partial<T>): HTMLElement {
-    Object.assign(this, data ?? {});
-    return this.container;
-  }
+	render(data?: Partial<T>): HTMLElement {
+		Object.assign(this, data ?? {});
+		return this.container;
+	}
 }

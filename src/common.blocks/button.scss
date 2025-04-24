@@ -1,35 +1,33 @@
-@use "../scss/variables" as *;
-@use "../scss/mixins";
+@use '../scss/variables' as *;
+@use '../scss/mixins';
 
 .button {
-  @include mixins.button($primary, $secondary, $hover);
-  border: none;
-  text-align: center;
+	@include mixins.button($primary, $secondary, $hover);
+	border: none;
+	text-align: center;
 
-  @media (max-width: 910px) {
-    font-size: nth($mainFontSize, 2);
-  }
+	@media (max-width: 910px) {
+		font-size: nth($mainFontSize, 2);
+	}
 
-  @media (max-width: 560px) {
-    padding: 10px 20px;
-    font-size: nth($mainFontSize, 1);
-    border-radius: $minBorderRadius;
-  }
+	@media (max-width: 560px) {
+		padding: 10px 20px;
+		font-size: nth($mainFontSize, 1);
+		border-radius: $minBorderRadius;
+	}
 
-  &_type {
+	&_type {
+		&_order {
+		}
+	}
 
-    &_order {
-    }
-  }
+	&_order-success {
+		&_close {
+			margin-top: 70px;
 
-  &_order-success {
-
-    &_close {
-      margin-top: 70px;
-
-      @media (max-width: 560px) {
-        margin-top: 30px;
-      }
-    }
-  }
+			@media (max-width: 560px) {
+				margin-top: 30px;
+			}
+		}
+	}
 }

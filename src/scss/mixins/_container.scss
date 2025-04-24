@@ -1,28 +1,28 @@
-@use "../variables" as *;
+@use '../variables' as *;
 
 @mixin container($top: $defaultPadding, $bottom: $defaultPadding) {
-  max-width: $maxPageWidth;
-  box-sizing: border-box;
-  padding: $top $defaultPadding $bottom;
-  margin: 0 auto;
+	max-width: $maxPageWidth;
+	box-sizing: border-box;
+	padding: $top $defaultPadding $bottom;
+	margin: 0 auto;
 }
 
 @mixin sublayer($position: fixed) {
-  position: $position;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+	position: $position;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
 @mixin flex($direction: column) {
-  display: flex;
-  flex-direction: $direction;
+	display: flex;
+	flex-direction: $direction;
 }
 
 @mixin grid($columns: 1fr, $gap: 0, $autoFlow: row) {
-  display: grid;
-  grid-template-columns: $columns;
-  gap: $gap;
-  grid-auto-flow: $autoFlow;
+	display: grid;
+	grid-template-columns: $columns;
+	gap: $gap;
+	grid-auto-flow: $autoFlow;
 }

@@ -1,11 +1,11 @@
-$background: #370F21;
-$primary: #14060C;
-$primaryLight: #4F1E33;
-$hover: #C75F8C;
-$secondary: #FFFFFF;
-$error: #F18B7E;
+$background: #370f21;
+$primary: #14060c;
+$primaryLight: #4f1e33;
+$hover: #c75f8c;
+$secondary: #ffffff;
+$error: #f18b7e;
 
-$font: "YS Text", Roboto, Helvetica, Arial, sans-serif;
+$font: 'YS Text', Roboto, Helvetica, Arial, sans-serif;
 
 $smallFontSize: 12px, 16px, 20px;
 $mainFontSize: 16px, 20px, 30px;
@@ -14,11 +14,11 @@ $titleFontSize: 30px, 40px, 50px;
 $minPageWidth: 320px;
 $maxPageWidth: 1320px;
 
-$category1: #83FA9D;
-$category2: #FAD883;
-$category3: #B783FA;
-$category4: #83DDFA;
-$category5: #FAA083;
+$category1: #83fa9d;
+$category2: #fad883;
+$category3: #b783fa;
+$category4: #83ddfa;
+$category5: #faa083;
 
 $minPadding: 16px;
 $midPadding: 24px;
@@ -28,8 +28,8 @@ $minBorderRadius: 12px;
 $defaultBorderRadius: 60px;
 
 $defaultBorder: 2px $primaryLight solid;
-$checkedBorder: 2px #FFFFFF solid;
-$hoverBorder: 2px solid rgba(#FFFFFF, 0.4);
+$checkedBorder: 2px #ffffff solid;
+$hoverBorder: 2px solid rgba(#ffffff, 0.4);
 $overlayBackground: rgba(0, 0, 0, 0.8);
 
 $templateGallery: repeat(auto-fit, minmax(400px, 1fr));

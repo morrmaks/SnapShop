@@ -1,72 +1,72 @@
-@use "../scss/variables" as *;
-@use "../scss/mixins";
+@use '../scss/variables' as *;
+@use '../scss/mixins';
 
 .header {
-  height: 180px;
-  background-color: $primary;
+	height: 180px;
+	background-color: $primary;
 
-  @media (max-width: 560px) {
-    height: 90px;
-  }
+	@media (max-width: 560px) {
+		height: 90px;
+	}
 
-  &__container {
-    @include mixins.flex(row);
-    @include mixins.container(45px);
-    justify-content: space-between;
-    align-items: center;
+	&__container {
+		@include mixins.flex(row);
+		@include mixins.container(45px);
+		justify-content: space-between;
+		align-items: center;
 
-    @media (max-width: 560px) {
-      padding: 16px;
-    }
-  }
+		@media (max-width: 560px) {
+			padding: 16px;
+		}
+	}
 
-  &__logo {
-    @include mixins.selectable(transparent, .5);
-    height: 90px;
+	&__logo {
+		@include mixins.selectable(transparent, 0.5);
+		height: 90px;
 
-    @media (max-width: 560px) {
-      height: 45px;
-    }
-  }
+		@media (max-width: 560px) {
+			height: 45px;
+		}
+	}
 
-  &__logo {
-    &-image {
-      display: block;
-      height: 100%;
-    }
-  }
+	&__logo {
+		&-image {
+			display: block;
+			height: 100%;
+		}
+	}
 
-  &__basket {
-    @include mixins.background("../images/shopping_cart.png", cover, center);
-    @include mixins.link($secondary, $primaryLight, .5);
-    width: 58px;
-    height: 58px;
+	&__basket {
+		@include mixins.background('../images/shopping_cart.png', cover, center);
+		@include mixins.link($secondary, $primaryLight, 0.5);
+		width: 58px;
+		height: 58px;
 
-    @media (max-width: 560px) {
-      width: 30px;
-      height: 30px;
-    }
+		@media (max-width: 560px) {
+			width: 30px;
+			height: 30px;
+		}
 
-    &-counter {
-      @include mixins.flex(row);
-      justify-content: center;
-      align-items: center;
-      width: 16px;
-      height: 16px;
-      border-radius: 100%;
-      background-color: $category1;
-      color: $background;
-      position: absolute;
-      top: 0;
-      right: -4px;
-      font-size: 10px;
-      font-weight: 500;
+		&-counter {
+			@include mixins.flex(row);
+			justify-content: center;
+			align-items: center;
+			width: 16px;
+			height: 16px;
+			border-radius: 100%;
+			background-color: $category1;
+			color: $background;
+			position: absolute;
+			top: 0;
+			right: -4px;
+			font-size: 10px;
+			font-weight: 500;
 
-      @media (max-width: 560px) {
-        width: 12px;
-        height: 12px;
-        font-size: 8px;
-      }
-    }
-  }
+			@media (max-width: 560px) {
+				width: 12px;
+				height: 12px;
+				font-size: 8px;
+			}
+		}
+	}
 }

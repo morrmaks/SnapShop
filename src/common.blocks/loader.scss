@@ -1,60 +1,62 @@
-@use "../scss/variables" as *;
-@use "../scss/mixins";
+@use '../scss/variables' as *;
+@use '../scss/mixins';
 
 .loader {
-  @include mixins.sublayer(fixed);
-  @include mixins.flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 200;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.2s ease, visibility 0.2s;
+	@include mixins.sublayer(fixed);
+	@include mixins.flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 200;
+	visibility: hidden;
+	opacity: 0;
+	transition:
+		opacity 0.2s ease,
+		visibility 0.2s;
 
-  &_active {
-    visibility: visible;
-    opacity: 1;
+	&_active {
+		visibility: visible;
+		opacity: 1;
 
-    .loader__circle {
-      animation: rotate 2s linear infinite;
-    }
+		.loader__circle {
+			animation: rotate 2s linear infinite;
+		}
 
-    .loader__path {
-      animation: dash 1.5s ease-in-out infinite;
-    }
-  }
+		.loader__path {
+			animation: dash 1.5s ease-in-out infinite;
+		}
+	}
 
-  &__circle {
-    width: 80px;
-    height: 80px;
-  }
+	&__circle {
+		width: 80px;
+		height: 80px;
+	}
 
-  &__path {
-    stroke: #FFF;
-    stroke-linecap: round;
-    stroke-dasharray: 180, 300;
-    stroke-dashoffset: 0;
-  }
+	&__path {
+		stroke: #fff;
+		stroke-linecap: round;
+		stroke-dasharray: 180, 300;
+		stroke-dashoffset: 0;
+	}
 }
 
 @keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 @keyframes dash {
-  0% {
-    stroke-dasharray: 1, 300;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 180, 300;
-    stroke-dashoffset: -70;
-  }
-  100% {
-    stroke-dasharray: 180, 300;
-    stroke-dashoffset: -248;
-  }
+	0% {
+		stroke-dasharray: 1, 300;
+		stroke-dashoffset: 0;
+	}
+	50% {
+		stroke-dasharray: 180, 300;
+		stroke-dashoffset: -70;
+	}
+	100% {
+		stroke-dasharray: 180, 300;
+		stroke-dashoffset: -248;
+	}
 }

@@ -1,94 +1,94 @@
-@use "../scss/variables" as *;
-@use "../scss/mixins";
+@use '../scss/variables' as *;
+@use '../scss/mixins';
 
 .order {
-  @include mixins.flex(column);
-  border: none;
-  margin: 0;
-  padding: 0;
-  gap: 80px;
+	@include mixins.flex(column);
+	border: none;
+	margin: 0;
+	padding: 0;
+	gap: 80px;
 
-  @media (max-width: 910px) {
-    gap: 50px
-  }
+	@media (max-width: 910px) {
+		gap: 50px;
+	}
 
-  @media (max-width: 560px) {
-    gap: 30px
-  }
+	@media (max-width: 560px) {
+		gap: 30px;
+	}
 
-  &__legend {
-    font-size: nth($mainFontSize, 3);
-    color: $secondary;
+	&__legend {
+		font-size: nth($mainFontSize, 3);
+		color: $secondary;
 
-    @media (max-width: 910px) {
-      font-size: nth($mainFontSize, 2);
-    }
+		@media (max-width: 910px) {
+			font-size: nth($mainFontSize, 2);
+		}
 
-    @media (max-width: 560px) {
-      font-size: nth($mainFontSize, 1);
-    }
-  }
+		@media (max-width: 560px) {
+			font-size: nth($mainFontSize, 1);
+		}
+	}
 
-  &__label {
-    @include mixins.flex(row);
-  }
+	&__label {
+		@include mixins.flex(row);
+	}
 
-  &__buttons {
-    @include mixins.flex(row);
-    gap: 30px;
-    margin-top: 30px;
+	&__buttons {
+		@include mixins.flex(row);
+		gap: 30px;
+		margin-top: 30px;
 
-    @media (max-width: 910px) {
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
+		@media (max-width: 910px) {
+			margin-top: 20px;
+			flex-wrap: wrap;
+		}
 
-    @media (max-width: 560px) {
-      gap: 15px;
-      margin-top: 12px;
-    }
-  }
+		@media (max-width: 560px) {
+			gap: 15px;
+			margin-top: 12px;
+		}
+	}
 
-  &__button {
-    @include mixins.button($secondary, $primaryLight, $primaryLight);
-    min-width: 215px;
+	&__button {
+		@include mixins.button($secondary, $primaryLight, $primaryLight);
+		min-width: 215px;
 
-    @media (max-width: 910px) {
-      min-width: 150px;
-      font-size: nth($mainFontSize, 2);
-    }
+		@media (max-width: 910px) {
+			min-width: 150px;
+			font-size: nth($mainFontSize, 2);
+		}
 
-    @media (max-width: 560px) {
-      min-width: 115px;
-      font-size: nth($mainFontSize, 1);
-      padding: 10px 25px;
-      border-radius: $minBorderRadius;
-    }
-  }
+		@media (max-width: 560px) {
+			min-width: 115px;
+			font-size: nth($mainFontSize, 1);
+			padding: 10px 25px;
+			border-radius: $minBorderRadius;
+		}
+	}
 
-  &__input {
-    position: absolute;
-    opacity: 0;
+	&__input {
+		position: absolute;
+		opacity: 0;
 
-    &:hover + .order__button {
-      outline: $hoverBorder;
-    }
+		&:hover + .order__button {
+			outline: $hoverBorder;
+		}
 
-    &:checked + .order__button {
-      outline: $checkedBorder;
+		&:checked + .order__button {
+			outline: $checkedBorder;
 
-      @media (max-width: 560px) {
-        outline: 1px solid $secondary;
-      }
-    }
-  }
+			@media (max-width: 560px) {
+				outline: 1px solid $secondary;
+			}
+		}
+	}
 
-  &__field {
-    @include mixins.flex(column);
-    gap: 30px;
+	&__field {
+		@include mixins.flex(column);
+		gap: 30px;
 
-    @media (max-width: 910px) {
-      gap: 20px;
-    }
-  }
+		@media (max-width: 910px) {
+			gap: 20px;
+		}
+	}
 }

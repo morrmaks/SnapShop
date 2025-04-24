@@ -10,8 +10,8 @@
     "build:dev": "NODE_OPTIONS='--loader ts-node/esm' webpack --env mode=development",
     "build:prod": "NODE_OPTIONS='--loader ts-node/esm' webpack --env mode=production",
     "start": "NODE_OPTIONS='--loader ts-node/esm' webpack serve --env mode=development",
-    "lint": "eslint --ext .js,.ts ./src",
-    "lint:fix": "npm run lint -- --fix",
+    "lint": "eslint --config eslint.config.js --ext .js,.ts ./src",
+    "lint:fix": "npm run lint --fix",
     "format": "prettier --write ./src",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
@@ -28,6 +28,7 @@
   "devDependencies": {
     "@babel/core": "^7.26.9",
     "@babel/preset-env": "^7.26.9",
+    "@eslint/js": "^9.25.1",
     "@types/dotenv-webpack": "^7.0.8",
     "@typescript-eslint/eslint-plugin": "^8.25.0",
     "@typescript-eslint/parser": "^8.25.0",
